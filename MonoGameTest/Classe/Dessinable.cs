@@ -11,10 +11,13 @@ namespace MonoGameTest.Classe
         protected int SizeSprit = 40;
         public int x { get; set; }
         public int y { get; set; }
-        public Dessinable(int x, int y)
+       
+        
+        public Dessinable(int x, int y )
         {
             this.x = x;
             this.y = y;
+            
         }
         abstract public void draw(SpriteBatch sprite);
     }

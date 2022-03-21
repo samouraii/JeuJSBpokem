@@ -52,19 +52,33 @@ namespace MonoGameTest
         private TimeSpan time = new TimeSpan();
         protected override void Update(GameTime gameTime)
         {
-            
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            if (Keyboard.GetState().IsKeyDown(Keys.Right) && time.TotalSeconds + gameTime.ElapsedGameTime.TotalSeconds > 0.09 )
+            if (Keyboard.GetState().IsKeyDown(Keys.Right) && time.TotalSeconds + gameTime.ElapsedGameTime.TotalSeconds > 0.09)
             {
-                Personnages[0].déplacement(1, 0);
+                Personnages[0].déplacement("droite");
                 time *= 0;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            else if (Keyboard.GetState().IsKeyDown(Keys.Left) && time.TotalSeconds + gameTime.ElapsedGameTime.TotalSeconds > 0.09)
             {
-                Personnages[0].déplacement(-1, 0);
+                Personnages[0].déplacement("gauche");
                 time *= 0;
             }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Up) && time.TotalSeconds + gameTime.ElapsedGameTime.TotalSeconds > 0.09)
+            {
+               
+                    Personnages[0].déplacement("haut");
+                    time *= 0;
+                
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Down) && time.TotalSeconds + gameTime.ElapsedGameTime.TotalSeconds > 0.09)
+            {
+                Personnages[0].déplacement("bas");
+                time *= 0;
+            }
+
+
             // TODO: Add your update logic here
             time += gameTime.ElapsedGameTime;
             base.Update(gameTime);

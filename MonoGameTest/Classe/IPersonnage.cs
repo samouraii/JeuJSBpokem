@@ -7,6 +7,8 @@ namespace MonoGameTest.Classe
 {
     interface IPersonnage : ISprit
     {
-        public void déplacement(int x, int y);
+        public void déplacement(string direction);
+        public bool CanSaute();
+        public void AuSol();
     }
 }
