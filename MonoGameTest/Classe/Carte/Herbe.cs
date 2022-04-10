@@ -11,6 +11,7 @@ namespace MonoGameTest.Classe.Carte
 {
     class Herbe : Dessinable, ISprit
     {
+        public static char Lettre = 'H';
         private Texture2D texture2D;
         public Herbe(int x, int y, ContentManager content) :base(x,y)
         {
