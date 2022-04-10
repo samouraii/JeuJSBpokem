@@ -27,5 +27,7 @@ namespace MonoGameTest.Classe
             this.x += x;
             this.y += y;
         }
+
+        
     }
 }

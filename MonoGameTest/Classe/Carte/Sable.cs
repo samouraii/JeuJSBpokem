@@ -11,7 +11,9 @@ namespace MonoGameTest.Classe.Carte
 {
     class Sable : Dessinable, ISprit
     {
+        public static char Lettre = 'S';
         private Texture2D texture2D;
+        
         public Sable(int x, int y, ContentManager content) :base(x,y)
         {
            texture2D = content.Load<Texture2D>("spritTerrain");

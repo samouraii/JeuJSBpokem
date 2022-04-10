@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGameTest.Classe;
 using MonoGameTest.Classe.Carte;
+using System.Linq;
 
 namespace MonoGameTest
 {
@@ -31,20 +32,39 @@ namespace MonoGameTest
         public void CreateCarte(string URL)
         {
             int x = 0, y = 0;
-            foreach ( String lignes in System.IO.File.ReadAllLines(URL))
+            List<Dessinable> element = new List<Dessinable>();
+            var type = typeof(Dessinable);
+            Type[] types = AppDomain.CurrentDomain.GetAssemblies()
+                        .SelectMany(s => s.GetTypes())
+                        .Where(p => type.IsAssignableFrom(p) && p.GetField("Lettre") != null && (char)p.GetField("Lettre").GetValue(null) == 'S').ToArray();
+
+
+
+            foreach (String lignes in System.IO.File.ReadAllLines(URL))
             {
-                foreach(char lettre in lignes)
+                foreach (char lettre in lignes)
                 {
-                    if( lettre == 'H')
+                    /*if (lettre == 'H')
                     {
                         Carte.Add(new Herbe(x, y, content));
                     }
-                    else if(lettre == 'S') Carte.Add(new Sable(x, y, content));
+                    else if (lettre == 'S') Carte.Add(new Sable(x, y, content));
+                    else if (lettre == 'T') Carte.Add(new Terre(x, y, content));
+                    */
+                    types = AppDomain.CurrentDomain.GetAssemblies()
+                        .SelectMany(s => s.GetTypes())
+                        .Where(p => type.IsAssignableFrom(p) && p.GetField("Lettre") != null && (char)p.GetField("Lettre").GetValue(null) == lettre).ToArray();
+                    if (types.Length > 0)
+                    {
+                        Object[] args = { x, y, content };
+                        Carte.Add((Dessinable)Activator.CreateInstance(types[0], args));
+                    }
                     x++;
                 }
                 y++;
                 x = 0;
             }
         }
+
     }
 }
